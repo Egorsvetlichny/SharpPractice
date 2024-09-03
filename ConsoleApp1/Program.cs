@@ -179,8 +179,17 @@ namespace CSLRight
 
 
             //---Написание консольной игры---
-            ConsoleGame csGame = new ConsoleGame();
-            csGame.Game();
+            //ConsoleGame csGame = new ConsoleGame();
+            //csGame.Game();
+
+
+            //Коллекции в c#
+            CollectionPractice collectionPractice = new CollectionPractice();
+            collectionPractice.WorkArray();
+            collectionPractice.WorkList();
+            collectionPractice.WorkQueue();
+            collectionPractice.WorkStack();
+            collectionPractice.WorkDictionary();
 
             Console.ReadKey();
 
