@@ -293,7 +293,10 @@ namespace CSLRight
             Console.WriteLine();
             foreach (var item in sortingObject2.QuickSortObject(sortingObject2.ListInt))
                 Console.Write($"{item}, ");
-            Console.WriteLine();
+            Console.WriteLine("\n\n");
+
+
+            PlayersInfo.ShowPlayersInfo();
 
             Console.ReadKey();
         }
