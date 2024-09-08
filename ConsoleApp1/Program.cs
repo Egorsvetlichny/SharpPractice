@@ -298,6 +298,8 @@ namespace CSLRight
 
             PlayersInfo.ShowPlayersInfo();
 
+            GenericsPractice.ShowResults();
+
             Console.ReadKey();
         }
     }
