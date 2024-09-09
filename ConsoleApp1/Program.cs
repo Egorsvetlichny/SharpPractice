@@ -300,6 +300,8 @@ namespace CSLRight
 
             GenericsPractice.ShowResults();
 
+            InterfacePractice.ShowResults();
+
             Console.ReadKey();
         }
     }
