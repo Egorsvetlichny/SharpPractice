@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SharpPractice
 {
-    public interface IDrivable
+    public interface ICarInfo
     {
-        public void Drive();
+        public void ShowInfo();
     }
 
-    public class Car : IDrivable
+    public class Car : ICarInfo
     {
         public string Model { get; private set; }
 
@@ -20,7 +20,7 @@ namespace SharpPractice
             Model = model;
         }
 
-        public virtual void Drive()
+        public virtual void ShowInfo()
         {
             Console.Write("Машина ");
         }
@@ -35,9 +35,9 @@ namespace SharpPractice
             TypeCar = typeCar;
         }
 
-        public override void Drive()
+        public override void ShowInfo()
         {
-            base.Drive();
+            base.ShowInfo();
             Console.WriteLine($"\"{TypeCar} {Model}\"");
             Console.WriteLine("Нужно притормаживать на поворотах!");
         }
@@ -52,15 +52,21 @@ namespace SharpPractice
             TypeCar = typeCar;
         }
 
-        public override void Drive()
+        public override void ShowInfo()
         {
-            base.Drive();
+            base.ShowInfo();
             Console.WriteLine($"\"{TypeCar} {Model}\"");
             Console.WriteLine("Надо собирать попутно встречающиеся мячики!");
         }
     }
 
-    public class Person
+    public interface IDriver
+    {
+        void DriveCar();
+        void DriveForeingCar(Car car);
+    }
+
+    public abstract class Person
     {
         protected string Name { get; private set; }
 
@@ -70,7 +76,7 @@ namespace SharpPractice
         }
     }
 
-    public class Driver : Person
+    public class Driver : Person, IDriver
     {
         public int WorkExperience { get; private set; }
         public Car Car { get; set; }
@@ -83,9 +89,17 @@ namespace SharpPractice
 
         public void DriveCar()
         {
-            //Пример полиморфизма в C#. В зависимости от разных типов объекта Car будут вызываться соответствующие имплементации
+            //Полиморфизм в C#. В зависимости от разных типов объекта Car будут вызываться соответствующие имплементации
             Console.WriteLine($"Еду на машине {Car.Model}!");
-            Car.Drive();
+            Car.ShowInfo();
+            Console.WriteLine();
+        }
+
+        //В сигнатуре такого метода можно указывать интерфейс и реализовывать параметрический полиморфизм, но быть аккуратным с логикой
+        public void DriveForeingCar(Car car)
+        {
+            Console.WriteLine($"Веду чужую машину - {car.Model}");
+            car.ShowInfo();
             Console.WriteLine();
         }
     }
@@ -98,6 +112,10 @@ namespace SharpPractice
             RaceCar raceCar = new RaceCar("Болид", "Гоночный");
             GolfCar golfCar = new GolfCar("Гольфкар", "Транспортировочный");
 
+            //Ошибка. На основе абстрактного класса нельзя создать объект
+            //Person person = new Person("David");
+
+            //Но абстрактный класс можно использовать в качестве типа, для реализации параметрического полиморфизма в C#
             Person personDriver = new Driver("David", simpleCar, 3);
             Driver driver = new Driver("Alex", raceCar, 15);
 
@@ -110,6 +128,9 @@ namespace SharpPractice
 
             Driver newDriver = (Driver)personDriver;
             newDriver.DriveCar();
+            Console.WriteLine();
+            newDriver.DriveForeingCar(raceCar);
+            newDriver.DriveForeingCar(golfCar);
         }
     }
 }
