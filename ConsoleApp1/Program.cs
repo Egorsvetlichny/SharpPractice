@@ -193,12 +193,6 @@ namespace CSLRight
             //---Работа с алгоритмами сортировки---
             //AlgoSortingRun();
 
-
-            //---Написание консольной игры---
-            //ConsoleGame csGame = new ConsoleGame();
-            //csGame.Game();
-
-
             //Коллекции в c#
             //CollectionPractice collectionPractice = new CollectionPractice();
             //collectionPractice.WorkArray();
